@@ -11,4 +11,10 @@ message TestProto {
   double number4 = 4;
 
   string word = 5;
+
+  message Internal {
+    int32 number1 = 1;
+  }
+
+  Internal internal_message = 6;
 }

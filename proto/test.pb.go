@@ -22,14 +22,15 @@ const (
 )
 
 type TestProto struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Number1       int32                  `protobuf:"varint,1,opt,name=number1,proto3" json:"number1,omitempty"`
-	Number2       int64                  `protobuf:"varint,2,opt,name=number2,proto3" json:"number2,omitempty"`
-	Number3       float32                `protobuf:"fixed32,3,opt,name=number3,proto3" json:"number3,omitempty"`
-	Number4       float64                `protobuf:"fixed64,4,opt,name=number4,proto3" json:"number4,omitempty"`
-	Word          string                 `protobuf:"bytes,5,opt,name=word,proto3" json:"word,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Number1         int32                  `protobuf:"varint,1,opt,name=number1,proto3" json:"number1,omitempty"`
+	Number2         int64                  `protobuf:"varint,2,opt,name=number2,proto3" json:"number2,omitempty"`
+	Number3         float32                `protobuf:"fixed32,3,opt,name=number3,proto3" json:"number3,omitempty"`
+	Number4         float64                `protobuf:"fixed64,4,opt,name=number4,proto3" json:"number4,omitempty"`
+	Word            string                 `protobuf:"bytes,5,opt,name=word,proto3" json:"word,omitempty"`
+	InternalMessage *TestProto_Internal    `protobuf:"bytes,6,opt,name=internal_message,json=internalMessage,proto3" json:"internal_message,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TestProto) Reset() {
@@ -97,18 +98,72 @@ func (x *TestProto) GetWord() string {
 	return ""
 }
 
+func (x *TestProto) GetInternalMessage() *TestProto_Internal {
+	if x != nil {
+		return x.InternalMessage
+	}
+	return nil
+}
+
+type TestProto_Internal struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Number1       int32                  `protobuf:"varint,1,opt,name=number1,proto3" json:"number1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TestProto_Internal) Reset() {
+	*x = TestProto_Internal{}
+	mi := &file_test_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TestProto_Internal) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TestProto_Internal) ProtoMessage() {}
+
+func (x *TestProto_Internal) ProtoReflect() protoreflect.Message {
+	mi := &file_test_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TestProto_Internal.ProtoReflect.Descriptor instead.
+func (*TestProto_Internal) Descriptor() ([]byte, []int) {
+	return file_test_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *TestProto_Internal) GetNumber1() int32 {
+	if x != nil {
+		return x.Number1
+	}
+	return 0
+}
+
 var File_test_proto protoreflect.FileDescriptor
 
 const file_test_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"test.proto\x12\vprotodiffer\"\x87\x01\n" +
+	"test.proto\x12\vprotodiffer\"\xf9\x01\n" +
 	"\tTestProto\x12\x18\n" +
 	"\anumber1\x18\x01 \x01(\x05R\anumber1\x12\x18\n" +
 	"\anumber2\x18\x02 \x01(\x03R\anumber2\x12\x18\n" +
 	"\anumber3\x18\x03 \x01(\x02R\anumber3\x12\x18\n" +
 	"\anumber4\x18\x04 \x01(\x01R\anumber4\x12\x12\n" +
-	"\x04word\x18\x05 \x01(\tR\x04wordB+Z)github.com/brotherlogic/protodiffer/protob\x06proto3"
+	"\x04word\x18\x05 \x01(\tR\x04word\x12J\n" +
+	"\x10internal_message\x18\x06 \x01(\v2\x1f.protodiffer.TestProto.InternalR\x0finternalMessage\x1a$\n" +
+	"\bInternal\x12\x18\n" +
+	"\anumber1\x18\x01 \x01(\x05R\anumber1B+Z)github.com/brotherlogic/protodiffer/protob\x06proto3"
 
 var (
 	file_test_proto_rawDescOnce sync.Once
@@ -122,16 +177,18 @@ func file_test_proto_rawDescGZIP() []byte {
 	return file_test_proto_rawDescData
 }
 
-var file_test_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_test_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_test_proto_goTypes = []any{
-	(*TestProto)(nil), // 0: protodiffer.TestProto
+	(*TestProto)(nil),          // 0: protodiffer.TestProto
+	(*TestProto_Internal)(nil), // 1: protodiffer.TestProto.Internal
 }
 var file_test_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: protodiffer.TestProto.internal_message:type_name -> protodiffer.TestProto.Internal
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_test_proto_init() }
@@ -145,7 +202,7 @@ func file_test_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_test_proto_rawDesc), len(file_test_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
